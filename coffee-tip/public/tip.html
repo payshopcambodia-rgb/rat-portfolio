@@ -764,7 +764,8 @@ toggle.querySelectorAll("button").forEach((btn) => {
    STATE SWITCHER
 ============================================================ */
 function showState(id) {
-  ["stateSelect", "stateQr", "stateResult"].forEach((s) => {
+  $("stateSelect").classList.add("is-visible");
+  ["stateQr", "stateResult"].forEach((s) => {
     $(s).classList.toggle("is-visible", s === id);
   });
 }
