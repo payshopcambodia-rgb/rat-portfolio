@@ -33,6 +33,11 @@ app.use(cors());
 app.use(express.json({ limit: "32kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
+// Pretty URL: /tip -> public/tip.html
+app.get("/tip", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "tip.html"));
+});
+
 const bakong = axios.create({
   baseURL: BAKONG_BASE,
   timeout: 15000,
