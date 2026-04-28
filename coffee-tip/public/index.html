@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#FF6EB4" />
+<title>Buy Me a Coffee ☕ — NARAT CHHEAK</title>
+<meta name="description" content="Support my work — one coffee at a time. Pay with Bakong KHQR." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --pink: #FF6EB4;
+  --pink-d: #FF4FA3;
+  --violet: #A78BFA;
+  --mint: #34D399;
+  --yellow: #FBBF24;
+  --red: #FB7185;
+  --bg: #FFF0F5;
+  --bg-soft: #FDE8F1;
+  --surface: #FFFFFF;
+  --text: #4B3F6B;
+  --muted: #9C8CB0;
+  --border: #F0D6E8;
+
+  --pastel-pink:   #FFD6E8;
+  --pastel-violet: #E9DDFD;
+  --pastel-mint:   #CFF5E1;
+  --pastel-yellow: #FEEFC3;
+
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 6px 24px rgba(255, 110, 180, 0.10);
+  --shadow-pop:  0 14px 40px rgba(167, 139, 250, 0.18);
+  --shadow-glow: 0 0 0 6px rgba(255, 110, 180, 0.18);
+
+  --font-h: "Nunito", system-ui, sans-serif;
+  --font-b: "Poppins", system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --bounce: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-b);
+  color: var(--text);
+  background: radial-gradient(ellipse at top, var(--bg) 0%, #F3E8FF 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><path d='M14 4l2.5 6 6.5.5-5 4.3 1.6 6.4L14 17.8l-5.6 3.4 1.6-6.4-5-4.3 6.5-.5z' fill='%23FF6EB4' stroke='%23ffffff' stroke-width='1.4' stroke-linejoin='round'/></svg>") 14 14, auto;
+}
+::selection { background: var(--pink); color: #fff; }
+
+button { font: inherit; cursor: inherit; border: 0; background: none; color: inherit; }
+input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; border-radius: 8px; }
+
+/* ============================================================
+   FLOATING DECOR
+============================================================ */
+.floats {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.floats svg {
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 6px 12px rgba(167,139,250,.18));
+}
+.floats .f1 { top: 8%;  left: 6%;  width: 36px; opacity: .55; animation-duration: 5s; }
+.floats .f2 { top: 14%; right: 8%; width: 44px; opacity: .55; animation-duration: 6.5s; animation-delay: .4s; }
+.floats .f3 { top: 75%; left: 8%;  width: 30px; opacity: .55; animation-duration: 4.5s; animation-delay: .8s; }
+.floats .f4 { top: 80%; right: 10%; width: 48px; opacity: .55; animation-duration: 7s; animation-delay: .2s; }
+.floats .f5 { top: 40%; left: 4%; width: 26px; opacity: .55; animation-duration: 4s; animation-delay: 1.1s; }
+.floats .f6 { top: 50%; right: 5%; width: 32px; opacity: .55; animation-duration: 6s; animation-delay: .6s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-18px) rotate(8deg); }
+}
+
+/* ============================================================
+   LAYOUT
+============================================================ */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.header { text-align: center; margin-bottom: 32px; }
+.header__emoji {
+  font-size: 56px;
+  display: inline-block;
+  animation: bounceIn .8s var(--bounce);
+}
+@keyframes bounceIn {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.header__title {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: clamp(32px, 7vw, 44px);
+  margin: 8px 0 4px;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -.01em;
+  opacity: 0;
+  animation: fadeUp .6s var(--ease) .3s forwards;
+}
+.header__subtitle {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 12px;
+  opacity: 0;
+  animation: fadeUp .6s var(--ease) .6s forwards;
+}
+.header__creator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  animation: fadeUp .6s var(--ease) .9s forwards;
+}
+.header__creator .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 0 4px rgba(52,211,153,.25);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   CARD
+============================================================ */
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp .6s var(--ease) .8s forwards;
+}
+@media (max-width: 480px) { .card { padding: 22px; } }
+
+.card__title {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 18px;
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card__hint { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+
+/* ============================================================
+   AMOUNT BUTTONS
+============================================================ */
+.amounts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (max-width: 480px) { .amounts { grid-template-columns: repeat(2, 1fr); } }
+
+.amount-btn {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 8px;
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  text-align: center;
+  transition: transform .2s var(--bounce), background .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  opacity: 0;
+  transform: scale(.8);
+  animation: popInBtn .4s var(--bounce) forwards;
+}
+.amount-btn:nth-child(1) { animation-delay: 1.0s; }
+.amount-btn:nth-child(2) { animation-delay: 1.1s; }
+.amount-btn:nth-child(3) { animation-delay: 1.2s; }
+.amount-btn:nth-child(4) { animation-delay: 1.3s; }
+@keyframes popInBtn {
+  to { opacity: 1; transform: scale(1); }
+}
+.amount-btn:hover {
+  transform: scale(1.05);
+  background: var(--pastel-pink);
+  border-color: var(--pink);
+  box-shadow: 0 6px 16px rgba(255,110,180,.18);
+}
+.amount-btn .emo { font-size: 22px; }
+.amount-btn.is-active {
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 22px rgba(255, 110, 180, 0.35);
+}
+
+/* ============================================================
+   CUSTOM AMOUNT + CURRENCY
+============================================================ */
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+
+.input {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 14px 18px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+}
+.input::placeholder { color: var(--muted); font-style: italic; opacity: .8; }
+.input:focus {
+  outline: none;
+  border-color: var(--pink);
+  background: #fff;
+  box-shadow: var(--shadow-glow);
+}
+
+.toggle {
+  display: inline-flex;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  position: relative;
+}
+.toggle button {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 18px;
+  color: var(--muted);
+  border-radius: var(--radius-pill);
+  z-index: 1;
+  transition: color .2s var(--ease);
+}
+.toggle button.is-active { color: #fff; }
+.toggle .toggle__pill {
+  position: absolute;
+  top: 4px; bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  border-radius: var(--radius-pill);
+  transition: transform .3s var(--bounce);
+  z-index: 0;
+  box-shadow: 0 4px 10px rgba(255,110,180,.3);
+}
+.toggle.is-khr .toggle__pill { transform: translateX(100%); }
+
+textarea.input {
+  border-radius: 18px;
+  resize: vertical;
+  min-height: 80px;
+  font-family: var(--font-b);
+  margin-bottom: 14px;
+  display: block;
+}
+
+/* ============================================================
+   PRIMARY BUTTON
+============================================================ */
+.btn {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 15px;
+  padding: 16px 24px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  transition: transform .2s var(--ease), box-shadow .25s var(--ease), background .2s var(--ease);
+  border: 2px solid transparent;
+}
+.btn--primary {
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(255, 110, 180, 0.35);
+}
+.btn--primary:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: 0 12px 32px rgba(255, 110, 180, 0.5);
+  animation: wiggle .4s ease-in-out;
+}
+@keyframes wiggle {
+  0%, 100% { transform: scale(1.03) rotate(0); }
+  25% { transform: scale(1.03) rotate(-3deg); }
+  75% { transform: scale(1.03) rotate(3deg); }
+}
+.btn--ghost {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--muted);
+}
+.btn--ghost:hover {
+  border-color: var(--violet);
+  color: var(--violet);
+  background: var(--pastel-violet);
+}
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+.spinner {
+  width: 16px; height: 16px;
+  border: 2.5px solid rgba(255,255,255,.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   STATES
+============================================================ */
+.state { display: none; }
+.state.is-visible { display: block; animation: cardIn .5s var(--ease); }
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* QR view */
+.qr-amount {
+  text-align: center;
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 28px;
+  margin: 0 0 14px;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.qr-frame {
+  background: #fff;
+  border: 2.5px dashed var(--pink);
+  border-radius: 24px;
+  padding: 14px;
+  max-width: 280px;
+  margin: 0 auto 16px;
+  box-shadow: var(--shadow-soft);
+}
+.qr-frame img { display: block; width: 100%; border-radius: 14px; }
+.qr-note {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+
+.timer {
+  text-align: center;
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.timer__bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.timer__fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--violet));
+  border-radius: var(--radius-pill);
+  transition: width 1s linear;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pastel-yellow);
+  border: 1.5px solid #F4D88A;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 13px;
+  color: #92580A;
+  margin: 0 auto 18px;
+  width: fit-content;
+}
+.status-badge__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--yellow);
+  animation: pulseDot 1.4s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: .55; }
+}
+.row-center { display: flex; justify-content: center; }
+
+/* Result */
+.result { text-align: center; padding: 8px 0; }
+.result__icon {
+  font-size: 64px;
+  display: inline-block;
+  animation: bounceIn .8s var(--bounce);
+}
+.result__title {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 24px;
+  margin: 12px 0 6px;
+}
+.result__msg {
+  color: var(--muted);
+  font-size: 15px;
+  margin: 0 0 18px;
+}
+.result--success { background: linear-gradient(180deg, var(--pastel-mint) 0 50%, var(--surface) 50%); border-radius: 18px; padding: 24px 16px; }
+.result--success .result__title { color: #117a48; }
+.result--error   { background: linear-gradient(180deg, #FFE0E0 0 50%, var(--surface) 50%); border-radius: 18px; padding: 24px 16px; }
+.result--error   .result__title { color: #b3413e; }
+
+.amount-pill {
+  display: inline-block;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+/* dancing star */
+.dance-star {
+  display: inline-block;
+  font-size: 56px;
+  animation: dance 1.4s ease-in-out infinite;
+}
+@keyframes dance {
+  0%, 100% { transform: rotate(-10deg) scale(1); }
+  50%      { transform: rotate(10deg) scale(1.1); }
+}
+
+/* ============================================================
+   CONFETTI
+============================================================ */
+.confetti {
+  position: fixed;
+  pointer-events: none;
+  width: 10px; height: 14px;
+  z-index: 9999;
+  border-radius: 2px;
+  top: 50%; left: 50%;
+  animation: confetti 1.6s ease-out forwards;
+}
+@keyframes confetti {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)); opacity: 0; }
+}
+
+/* ============================================================
+   ERROR TOAST
+============================================================ */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface);
+  border: 1.5px solid var(--red);
+  color: var(--text);
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: var(--shadow-pop);
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  z-index: 10000;
+  pointer-events: none;
+}
+.toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+footer {
+  text-align: center;
+  margin-top: 32px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+footer .heart { color: var(--pink); animation: heartBeat 1.4s ease-in-out infinite; display: inline-block; }
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- floating decor -->
+<div class="floats" aria-hidden="true">
+  <svg class="f1" viewBox="0 0 32 32"><path d="M16 2c1 7 7 13 14 14-7 1-13 7-14 14-1-7-7-13-14-14 7-1 13-7 14-14z" fill="#FF6EB4"/></svg>
+  <svg class="f2" viewBox="0 0 32 32"><path d="M16 28C8 22 2 16 2 10a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 6-6 12-14 18z" fill="#A78BFA"/></svg>
+  <svg class="f3" viewBox="0 0 40 24"><path d="M10 20c-4 0-7-3-7-6s3-6 7-6c1-3 4-5 7-5 4 0 7 3 7 7 4 0 7 2 7 5s-3 5-7 5z" fill="#34D399"/></svg>
+  <svg class="f4" viewBox="0 0 32 32"><path d="M16 4l2 10 10 2-10 2-2 10-2-10-10-2 10-2z" fill="#FBBF24"/></svg>
+  <svg class="f5" viewBox="0 0 32 32"><path d="M16 2c1 7 7 13 14 14-7 1-13 7-14 14-1-7-7-13-14-14 7-1 13-7 14-14z" fill="#FBBF24"/></svg>
+  <svg class="f6" viewBox="0 0 32 32"><path d="M16 28C8 22 2 16 2 10a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 6-6 12-14 18z" fill="#FF6EB4"/></svg>
+</div>
+
+<main class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header__emoji" aria-hidden="true">☕</div>
+    <h1 class="header__title">Buy Me a Coffee</h1>
+    <p class="header__subtitle">Support my work — one coffee at a time 🌸</p>
+    <span class="header__creator">
+      <span class="dot" aria-hidden="true"></span>
+      NARAT CHHEAK
+    </span>
+  </div>
+
+  <!-- ============================================================
+       STATE 1 — SELECTION
+  ============================================================ -->
+  <section class="card state is-visible" id="stateSelect" aria-labelledby="selectTitle">
+    <h2 class="card__title" id="selectTitle">🎀 Pick an amount</h2>
+
+    <div class="amounts" id="amountBtns">
+      <button type="button" class="amount-btn" data-amount="1">
+        <span class="emo">☕</span> $1
+      </button>
+      <button type="button" class="amount-btn" data-amount="3">
+        <span class="emo">☕☕</span> $3
+      </button>
+      <button type="button" class="amount-btn" data-amount="5">
+        <span class="emo">☕☕☕</span> $5
+      </button>
+      <button type="button" class="amount-btn" data-amount="10">
+        <span class="emo">💖</span> $10
+      </button>
+    </div>
+
+    <div class="row">
+      <input
+        type="number"
+        class="input"
+        id="customAmount"
+        placeholder="or type your own (min 0.5)"
+        min="0.5"
+        step="0.5"
+        inputmode="decimal"
+        aria-label="Custom amount"
+      />
+      <div class="toggle" id="currencyToggle" role="tablist" aria-label="Currency">
+        <span class="toggle__pill" aria-hidden="true"></span>
+        <button type="button" class="is-active" data-currency="USD" role="tab" aria-selected="true">USD</button>
+        <button type="button" data-currency="KHR" role="tab" aria-selected="false">KHR</button>
+      </div>
+    </div>
+
+    <textarea
+      class="input"
+      id="noteInput"
+      placeholder="Leave a kind note 🌷 (optional)"
+      maxlength="80"
+      aria-label="Note"
+    ></textarea>
+
+    <button type="button" class="btn btn--primary" id="generateBtn">
+      <span id="generateLabel">Generate QR Code 🎀</span>
+    </button>
+  </section>
+
+  <!-- ============================================================
+       STATE 2 — QR ACTIVE
+  ============================================================ -->
+  <section class="card state" id="stateQr" aria-labelledby="qrTitle" aria-live="polite">
+    <h2 class="card__title" id="qrTitle">📱 Scan with Bakong</h2>
+    <p class="qr-amount" id="qrAmount">$0.00</p>
+
+    <div class="qr-frame">
+      <img id="qrImg" alt="KHQR payment code" />
+    </div>
+    <p class="qr-note">Open your banking app, scan with KHQR, and confirm 💖</p>
+
+    <p class="timer" id="timerLabel">⏳ Expires in 3:00</p>
+    <div class="timer__bar"><div class="timer__fill" id="timerFill"></div></div>
+
+    <div class="row-center">
+      <span class="status-badge">
+        <span class="status-badge__dot" aria-hidden="true"></span>
+        Waiting for payment...
+      </span>
+    </div>
+
+    <button type="button" class="btn btn--ghost" id="cancelBtn">Cancel</button>
+  </section>
+
+  <!-- ============================================================
+       STATE 3 — RESULT
+  ============================================================ -->
+  <section class="card state" id="stateResult" aria-live="polite">
+    <div class="result" id="resultBody"></div>
+    <button type="button" class="btn btn--primary" id="resetBtn" style="margin-top: 16px;">
+      Send another tip 🎀
+    </button>
+  </section>
+
+  <footer>
+    Made with <span class="heart">♥</span> &amp; Bakong KHQR · &copy; <span id="year"></span>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   STATE
+============================================================ */
+const PRESETS = [1, 3, 5, 10];
+const POLL_MS = 5000;
+const TTL_S = 180;
+
+const state = {
+  amount: null,
+  currency: "USD",
+  md5: null,
+  pollTimer: null,
+  countdownTimer: null,
+  secondsLeft: TTL_S,
+};
+
+const $ = (id) => document.getElementById(id);
+
+/* ============================================================
+   AMOUNT SELECTION
+============================================================ */
+const amountBtns = $("amountBtns").querySelectorAll(".amount-btn");
+const customAmount = $("customAmount");
+
+amountBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    amountBtns.forEach((b) => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    state.amount = parseFloat(btn.dataset.amount);
+    customAmount.value = "";
+  });
+});
+
+customAmount.addEventListener("input", () => {
+  amountBtns.forEach((b) => b.classList.remove("is-active"));
+  const v = parseFloat(customAmount.value);
+  state.amount = isFinite(v) && v > 0 ? v : null;
+});
+
+/* ============================================================
+   CURRENCY TOGGLE
+============================================================ */
+const toggle = $("currencyToggle");
+toggle.querySelectorAll("button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const cur = btn.dataset.currency;
+    state.currency = cur;
+    toggle.classList.toggle("is-khr", cur === "KHR");
+    toggle.querySelectorAll("button").forEach((b) => {
+      const active = b.dataset.currency === cur;
+      b.classList.toggle("is-active", active);
+      b.setAttribute("aria-selected", String(active));
+    });
+    // Update preset labels and custom amount step for KHR
+    if (cur === "KHR") {
+      amountBtns.forEach((b, i) => {
+        const khr = [4000, 12000, 20000, 40000][i];
+        b.querySelector(".emo").nextSibling.textContent = " " + khr.toLocaleString() + "៛";
+        b.dataset.amount = String(khr);
+      });
+      customAmount.placeholder = "or type your own (min 100៛)";
+      customAmount.min = "100";
+      customAmount.step = "100";
+    } else {
+      amountBtns.forEach((b, i) => {
+        b.querySelector(".emo").nextSibling.textContent = " $" + PRESETS[i];
+        b.dataset.amount = String(PRESETS[i]);
+      });
+      customAmount.placeholder = "or type your own (min 0.5)";
+      customAmount.min = "0.5";
+      customAmount.step = "0.5";
+    }
+    // Reset selection because amount semantics changed
+    amountBtns.forEach((b) => b.classList.remove("is-active"));
+    state.amount = null;
+    customAmount.value = "";
+  });
+});
+
+/* ============================================================
+   STATE SWITCHER
+============================================================ */
+function showState(id) {
+  ["stateSelect", "stateQr", "stateResult"].forEach((s) => {
+    $(s).classList.toggle("is-visible", s === id);
+  });
+}
+
+/* ============================================================
+   GENERATE QR
+============================================================ */
+const generateBtn = $("generateBtn");
+const generateLabel = $("generateLabel");
+
+generateBtn.addEventListener("click", async () => {
+  if (!state.amount || state.amount <= 0) {
+    return showToast("🌸 please pick or type an amount first!");
+  }
+
+  generateBtn.disabled = true;
+  generateLabel.innerHTML = '<span class="spinner"></span> Generating...';
+
+  try {
+    const res = await fetch("/api/generate-qr", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: state.amount,
+        currency: state.currency,
+        note: $("noteInput").value || "",
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to generate QR");
+
+    state.md5 = data.md5;
+    $("qrImg").src = data.qrBase64;
+    $("qrAmount").textContent = formatAmount(data.amount, data.currency);
+    showState("stateQr");
+    startCountdown();
+    startPolling();
+  } catch (err) {
+    showToast("😢 " + (err.message || "Could not reach server."));
+  } finally {
+    generateBtn.disabled = false;
+    generateLabel.textContent = "Generate QR Code 🎀";
+  }
+});
+
+function formatAmount(amount, currency) {
+  if (currency === "KHR") return Number(amount).toLocaleString() + " ៛";
+  return "$" + Number(amount).toFixed(2);
+}
+
+/* ============================================================
+   COUNTDOWN
+============================================================ */
+function startCountdown() {
+  state.secondsLeft = TTL_S;
+  updateCountdown();
+  state.countdownTimer = setInterval(() => {
+    state.secondsLeft--;
+    updateCountdown();
+    if (state.secondsLeft <= 0) {
+      stopTimers();
+      showExpired();
+    }
+  }, 1000);
+}
+function updateCountdown() {
+  const m = Math.floor(state.secondsLeft / 60);
+  const s = String(state.secondsLeft % 60).padStart(2, "0");
+  $("timerLabel").textContent = `⏳ Expires in ${m}:${s}`;
+  $("timerFill").style.width = (state.secondsLeft / TTL_S) * 100 + "%";
+}
+
+/* ============================================================
+   POLLING
+============================================================ */
+function startPolling() {
+  state.pollTimer = setInterval(checkPayment, POLL_MS);
+  // also do an immediate check after a short delay
+  setTimeout(checkPayment, 1500);
+}
+async function checkPayment() {
+  if (!state.md5) return;
+  try {
+    const res = await fetch(`/api/check-payment/${encodeURIComponent(state.md5)}`);
+    const data = await res.json();
+    if (data.status === "paid") {
+      stopTimers();
+      showSuccess(data.amount, data.currency);
+    } else if (data.status === "expired") {
+      stopTimers();
+      showExpired();
+    }
+  } catch (_) {
+    // network blip — keep polling
+  }
+}
+
+function stopTimers() {
+  clearInterval(state.pollTimer);
+  clearInterval(state.countdownTimer);
+  state.pollTimer = null;
+  state.countdownTimer = null;
+}
+
+/* ============================================================
+   CANCEL
+============================================================ */
+$("cancelBtn").addEventListener("click", () => {
+  stopTimers();
+  state.md5 = null;
+  showState("stateSelect");
+});
+
+/* ============================================================
+   RESULT VIEWS
+============================================================ */
+function showSuccess(amount, currency) {
+  const body = $("resultBody");
+  body.className = "result result--success";
+  body.innerHTML = `
+    <div class="dance-star" aria-hidden="true">🌟</div>
+    <h2 class="result__title">Payment received!</h2>
+    <p class="result__msg">Thank you so much! 💖</p>
+    <span class="amount-pill">${formatAmount(amount ?? state.amount, currency ?? state.currency)}</span>
+  `;
+  showState("stateResult");
+  fireConfetti();
+}
+function showExpired() {
+  const body = $("resultBody");
+  body.className = "result result--error";
+  body.innerHTML = `
+    <div class="result__icon" aria-hidden="true">⏰</div>
+    <h2 class="result__title">QR code expired</h2>
+    <p class="result__msg">No worries — you can generate a fresh one 😢</p>
+  `;
+  showState("stateResult");
+}
+function showFailed(msg) {
+  const body = $("resultBody");
+  body.className = "result result--error";
+  body.innerHTML = `
+    <div class="result__icon" aria-hidden="true">😿</div>
+    <h2 class="result__title">Something went wrong</h2>
+    <p class="result__msg">${msg || "Please try again."}</p>
+  `;
+  showState("stateResult");
+}
+
+$("resetBtn").addEventListener("click", () => {
+  state.md5 = null;
+  state.amount = null;
+  amountBtns.forEach((b) => b.classList.remove("is-active"));
+  customAmount.value = "";
+  $("noteInput").value = "";
+  showState("stateSelect");
+});
+
+/* ============================================================
+   CONFETTI
+============================================================ */
+function fireConfetti() {
+  const COLORS = ["#FF6EB4", "#A78BFA", "#34D399", "#FBBF24", "#FB7185", "#60A5FA"];
+  const N = 40;
+  for (let i = 0; i < N; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 120 + Math.random() * 200;
+    c.style.setProperty("--dx", Math.cos(angle) * dist + "px");
+    c.style.setProperty("--dy", Math.sin(angle) * dist + "px");
+    c.style.setProperty("--rot", Math.random() * 720 - 360 + "deg");
+    c.style.background = COLORS[i % COLORS.length];
+    c.style.animationDelay = Math.random() * 0.15 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2000);
+  }
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+let toastTimer;
+function showToast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("is-visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("is-visible"), 2800);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+$("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
